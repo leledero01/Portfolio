@@ -814,7 +814,26 @@ export function Projects() {
 
   return (
     <div id="projects" style={{ minHeight: "100vh", padding: "120px 80px", color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-      
+      <style>{`
+        @media (min-width: 769px) {
+          .project-header-row {
+            display: flex !important;
+            align-items: center !important;
+            gap: 15px !important;
+          }
+
+          .project-icon-wrapper {
+            position: static !important;
+            top: auto !important;
+            left: auto !important;
+            opacity: 0.9 !important;
+          }
+
+          .project-title {
+            margin-left: 0 !important;
+          }
+        }
+      `}</style>
       <div style={{ textAlign: "center", marginBottom: "50px" }}>
         <h2 style={{ fontSize: "60px", margin: "0" }}>Progetti</h2>
         <p style={{ fontSize: "25px", opacity: 0.8, marginTop: "6px", fontWeight: "400" }}>Accademici e Personali</p>
@@ -823,35 +842,35 @@ export function Projects() {
       <div style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: "900px", gap: "25px" }}>
         {projectsData.map((project) => (
           <RevealContainer key={project.id} delay={300}>
-            <div className="hover-scale project-card" style={{ 
+            <div className="hover-scale project-card" style={{
               background: "linear-gradient(135deg, rgba(75,107,96,0.5), rgba(217,255,189,0.5))",
-              backdropFilter: "blur(10px)", 
-              borderRadius: "24px", 
-              padding: "35px", 
-              border: "1px solid rgba(255,255,255,0.15)", 
+              backdropFilter: "blur(10px)",
+              borderRadius: "24px",
+              padding: "35px",
+              border: "1px solid rgba(255,255,255,0.15)",
               boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
               position: "relative"
             }}>
-              
+
               <div className="project-header-row">
-                <div className="project-icon-wrapper" style={{ position: "absolute", top: "30px", left: "20px", opacity: 0.9 }}>
-                  <span style={{ 
-                    backgroundColor: "#224237", 
-                    borderRadius: "12px", 
-                    padding: "12px", 
-                    display: "flex", 
-                    alignItems: "center", 
+                <div className="project-icon-wrapper" style={{ opacity: 0.9 }}>
+                  <span style={{
+                    backgroundColor: "#224237",
+                    borderRadius: "12px",
+                    padding: "12px",
+                    display: "flex",
+                    alignItems: "center",
                     justifyContent: "center"
                   }}>
                     <FiBookOpen size={26} />
                   </span>
                 </div>
-                <h3 className="project-title" style={{ marginLeft: "50px", fontSize: "24px", margin: "0 0 5px 0", fontWeight: "600" }}>{project.title}</h3>
+                <h3 className="project-title" style={{ fontSize: "24px", margin: "0 0 5px 0", fontWeight: "600" }}>{project.title}</h3>
               </div>
 
               <div className="project-content" style={{ marginLeft: "50px" }}>
                 <p style={{ fontSize: "14px", opacity: 0.7, margin: "0 0 15px 0" }}>{project.date}</p>
-                
+
                 {project.subtitle && (
                   <div style={{ display: "flex", gap: "10px", marginBottom: "15px", alignItems: "flex-start" }}>
                     <FiBook size={16} style={{ marginTop: "3px", opacity: 0.8, flexShrink: 0 }} />
