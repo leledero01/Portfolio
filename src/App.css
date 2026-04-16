@@ -1,0 +1,249 @@
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* BACKGROUND */
+.bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #4F6C75, #0E1C26);
+  z-index: -1;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.navbar a,
+.navbar button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar.scrolled {
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+/* BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn.primary {
+  background: white;
+  color: #0E1C26;
+}
+
+/* ICONS */
+.icon {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.icon:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
+}
+
+/* HOME BUTTON */
+.home-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: auto;
+  padding: 12px 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- BUBBLE CONTAINER ---------- */
+.bubbles-container {
+  position: relative;
+  width: 550px;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FLOAT ANIMATIONS */
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -6px); }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-4px, 5px); }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5px, 3px); }
+}
+
+/* WRAPPER */
+.bubble-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+
+
+  --parallax: 0.12; /* più forte */
+  --dir: -1; /* SEMPRE verso l’alto */
+
+  transform: translateY(calc(var(--scroll-y, 0) * var(--parallax) * var(--dir)));
+
+  transition: transform 0.08s linear;
+}
+
+/* float animation */
+.bubble-wrapper:nth-child(3n+1) { animation: float-1 7s ease-in-out infinite; }
+.bubble-wrapper:nth-child(3n+2) { animation: float-2 9s ease-in-out infinite; }
+.bubble-wrapper:nth-child(3n)   { animation: float-3 8s ease-in-out infinite; }
+
+/* TEXT LAYERS */
+.bubble-text {
+  position: absolute;
+  pointer-events: none;
+  line-height: 1.2;
+}
+
+.bubble-text.bg-text {
+  z-index: 0;
+  transform: translate(3px, 4px) scale(1.05);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bubble-text.fg-text {
+  z-index: 2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* GLASS */
+.bubble-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 1;
+
+  background: radial-gradient(
+    circle at 25% 20%,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.20) 18%,
+    rgba(255, 255, 255, 0.08) 38%,
+    rgba(146, 167, 241, 0.15) 70%,
+    rgba(146, 163, 226, 0.35) 100%
+  );
+
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.35),
+    inset -8px -10px 18px rgba(255, 255, 255, 0.12),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.08),
+    0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.bubble-glass::before,
+.bubble-glass::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bubble-glass::before {
+  top: 12%;
+  left: 18%;
+  width: 55%;
+  height: 35%;
+  background: radial-gradient(circle, rgba(255,255,255,0.45), transparent 70%);
+  transform: rotate(-25deg);
+  filter: blur(2px);
+  opacity: 0.8;
+}
+
+.bubble-glass::after {
+  bottom: 10%;
+  right: 12%;
+  width: 45%;
+  height: 30%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  transform: rotate(20deg);
+  filter: blur(2px);
+  opacity: 0.7;
+}
